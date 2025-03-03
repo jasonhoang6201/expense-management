@@ -2,6 +2,7 @@ import React, {useRef, useState} from 'react';
 import {
   Animated,
   Dimensions,
+  Platform,
   StyleSheet,
   TouchableWithoutFeedback,
   View,
@@ -47,7 +48,7 @@ const FlipCard = ({
         toValue: 0,
         friction: 8,
         tension: 10,
-        useNativeDriver: true,
+        useNativeDriver: Platform.OS === 'ios',
       }).start();
     } else {
       // animate to the back side
@@ -55,7 +56,7 @@ const FlipCard = ({
         toValue: 180,
         friction: 8,
         tension: 10,
-        useNativeDriver: true,
+        useNativeDriver: Platform.OS === 'ios',
       }).start();
     }
     setIsFlipped(!isFlipped);

@@ -5,7 +5,7 @@ import React, {useEffect, useMemo, useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import MaskInput from 'react-native-mask-input';
-import ReactNativeModal from 'react-native-modal';
+import Modal from 'react-native-modal';
 import AppInput from '../design-system/input';
 import Text from '../text';
 import moment from 'moment';
@@ -85,53 +85,56 @@ const AddExpense = ({isShow, onClose, onAdd, editItem, onDelete}: Props) => {
   }, [canAdd, editItem]);
 
   return (
-    <ReactNativeModal
-      isVisible={isShow}
-      onBackdropPress={onClose}
-      onBackButtonPress={onClose}
-      className="justify-end m-0">
-      <View className="bg-black-primary rounded-t-[20px] p-[20px] min-h-[50%]">
-        <View className="flex-row items-center justify-between">
-          <Text className="text-[16px] font-semibold">
-            {editItem ? 'Update' : 'Add New'}
-          </Text>
-          <TouchableOpacity onPress={onClose}>
-            <CloseIcon />
-          </TouchableOpacity>
-        </View>
-
-        <KeyboardAwareScrollView>
-          <View className="mt-[20px]">
-            <Text className="text-[14px] font-semibold">Name</Text>
-            <AppInput
-              className="mt-[6px] border border-pink-primary rounded-[4px] text-[16px] text-white h-[40px]"
-              placeholder="Name"
-              placeholderTextColor="#CDCDCD"
-              value={data.name}
-              onChangeText={text => setData({...data, name: text})}
-              editable={!editItem?.isChecked}
-            />
+    <View className="flex-1">
+      <Modal
+        isVisible={isShow}
+        onBackdropPress={onClose}
+        onBackButtonPress={onClose}
+        propagateSwipe={true}
+        className="justify-end m-0 mt-[500px]">
+        <View className="bg-black-primary rounded-t-[20px] p-[20px] min-h-[50vh] w-[100vw]">
+          <View className="flex-row items-center justify-between z-[99]">
+            <Text className="text-[16px] font-semibold">
+              {editItem ? 'Update' : 'Add New'}
+            </Text>
+            <TouchableOpacity onPress={onClose}>
+              <CloseIcon />
+            </TouchableOpacity>
           </View>
 
-          <Text className="text-[14px] font-semibold mt-[20px]">Amount</Text>
-          <MaskInput
-            mask={vndMask}
-            placeholder="XXX,XXX"
-            keyboardType="numeric"
-            className="mt-[6px] border border-pink-primary rounded-[4px] text-[16px] text-white p-[8px] h-[40px] text-left"
-            textAlign="right"
-            numberOfLines={1}
-            inputMode="numeric"
-            placeholderTextColor="#CDCDCD"
-            value={data.amount}
-            onChangeText={text => setData({...data, amount: text})}
-            editable={!editItem?.isChecked}
-          />
+          <KeyboardAwareScrollView>
+            <View className="mt-[20px]">
+              <Text className="text-[14px] font-semibold">Name</Text>
+              <AppInput
+                className="mt-[6px] border border-pink-primary rounded-[4px] text-[16px] text-white h-[40px]"
+                placeholder="Name"
+                placeholderTextColor="#CDCDCD"
+                value={data.name}
+                onChangeText={text => setData({...data, name: text})}
+                editable={!editItem?.isChecked}
+              />
+            </View>
 
-          {renderButton}
-        </KeyboardAwareScrollView>
-      </View>
-    </ReactNativeModal>
+            <Text className="text-[14px] font-semibold mt-[20px]">Amount</Text>
+            <MaskInput
+              mask={vndMask}
+              placeholder="XXX,XXX"
+              keyboardType="numeric"
+              className="mt-[6px] border border-pink-primary rounded-[4px] text-[16px] text-white p-[8px] h-[40px] text-left"
+              textAlign="right"
+              numberOfLines={1}
+              inputMode="numeric"
+              placeholderTextColor="#CDCDCD"
+              value={data.amount}
+              onChangeText={text => setData({...data, amount: text})}
+              editable={!editItem?.isChecked}
+            />
+
+            {renderButton}
+          </KeyboardAwareScrollView>
+        </View>
+      </Modal>
+    </View>
   );
 };
 

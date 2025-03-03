@@ -75,6 +75,7 @@ const StackProgressChart = ({data}: Props) => {
       yAxisLabelWidth={0}
       xAxisColor="#CDCDCD"
       yAxisColor="#CDCDCD"
+      disablePress={true}
     />
   );
 };

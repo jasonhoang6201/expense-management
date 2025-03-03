@@ -1,12 +1,13 @@
 import CircularProgress from '@src/components/circular-progress';
 import ExpenseList from '@src/components/expense/expense-list';
-import FlipCard from '@src/components/flip-card';
 import StackProgressChart from '@src/components/stack-progress-chart';
+import Text from '@src/components/text';
 import {getAllExpensesByMonth} from '@src/mmkv/expense';
 import useExpenseStore from '@src/store/expense';
 import {Expense} from '@src/types/expense';
 import React, {useEffect, useMemo, useState} from 'react';
 import {View} from 'react-native';
+import FlipCard from 'react-native-flip-card';
 
 const FinancialManagement = () => {
   const {viewMonth, forceRefresh} = useExpenseStore();
@@ -60,26 +61,17 @@ const FinancialManagement = () => {
     });
   }, [expenses]);
 
-  console.info('expenses', expenses);
-  console.info('totalAmount', totalAmount);
-  console.info('totalCheckedAmount', totalCheckedAmount);
-
   return (
     <View className="p-[8px] bg-black-primary flex-1 pt-[16px]">
-      <FlipCard
-        front={
-          <View className="mx-[-8px]">
-            <StackProgressChart data={data} />
-          </View>
-        }
-        back={
+      <View className="h-[230px]">
+        <FlipCard flipHorizontal={true} flipVertical={false} clickable={true}>
+          <StackProgressChart data={data} />
           <CircularProgress
             current={totalAmount - totalCheckedAmount}
             total={totalAmount}
           />
-        }
-        height={200}
-      />
+        </FlipCard>
+      </View>
 
       <View className="h-[8px]" />
       <ExpenseList />

@@ -236,7 +236,7 @@ const ExpenseItem = ({type}: Props) => {
                     mask={vndMask}
                     placeholder="XXX,XXX"
                     keyboardType="numeric"
-                    className="w-[120px] px-[8px] h-[32px] text-[18px] border rounded-[4px] mx-[16px] text-white font-medium"
+                    className="w-[120px] px-[8px] min-h-[32px] text-[18px] border rounded-[4px] mx-[16px] text-white font-medium"
                     style={{
                       backgroundColor: faintBackgroundColor[type],
                       borderColor: faintBackgroundColor[type],
