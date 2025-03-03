@@ -63,7 +63,7 @@ const FinancialManagement = () => {
 
   return (
     <View className="p-[8px] bg-black-primary flex-1 pt-[16px]">
-      <View className="h-[230px]">
+      <View className="h-[230px] px-[8px]">
         <FlipCard flipHorizontal={true} flipVertical={false} clickable={true}>
           <StackProgressChart data={data} />
           <CircularProgress
