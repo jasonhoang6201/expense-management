@@ -18,7 +18,7 @@ export const formatNumber = (amount: number) => {
 };
 
 export const vndMask = createNumberMask({
-  delimiter: '.',
-  separator: ',',
+  delimiter: ',',
+  separator: '.',
   precision: 0,
 });

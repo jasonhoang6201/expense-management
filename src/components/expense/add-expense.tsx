@@ -1,14 +1,14 @@
 import CloseIcon from '@src/assets/icons/close-icon';
 import {vndMask} from '@src/utils/money';
 import classNames from 'classnames';
-import React, {useEffect, useMemo, useState} from 'react';
+import moment from 'moment';
+import React, {memo, useEffect, useMemo, useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import MaskInput from 'react-native-mask-input';
 import Modal from 'react-native-modal';
 import AppInput from '../design-system/input';
 import Text from '../text';
-import moment from 'moment';
 
 type Props = {
   isShow: boolean;
@@ -37,7 +37,7 @@ const AddExpense = ({isShow, onClose, onAdd, editItem, onDelete}: Props) => {
     }
   }, [editItem, isShow]);
 
-  const renderButton = useMemo(() => {
+  const renderButton = () => {
     if (editItem?.isChecked) {
       return (
         <Text className="text-[16px] font-medium text-pink-primary mt-[20px]">
@@ -82,7 +82,7 @@ const AddExpense = ({isShow, onClose, onAdd, editItem, onDelete}: Props) => {
       </>
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [canAdd, editItem]);
+  };
 
   return (
     <View className="flex-1">
@@ -130,7 +130,7 @@ const AddExpense = ({isShow, onClose, onAdd, editItem, onDelete}: Props) => {
               editable={!editItem?.isChecked}
             />
 
-            {renderButton}
+            {renderButton()}
           </KeyboardAwareScrollView>
         </View>
       </Modal>
@@ -138,4 +138,4 @@ const AddExpense = ({isShow, onClose, onAdd, editItem, onDelete}: Props) => {
   );
 };
 
-export default AddExpense;
+export default memo(AddExpense);

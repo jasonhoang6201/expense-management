@@ -11,7 +11,7 @@ import {
 import {vndMask} from '@src/utils/money';
 import classNames from 'classnames';
 import moment from 'moment';
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {memo, useEffect, useMemo, useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import {
@@ -43,7 +43,7 @@ const ExpenseItem = ({type}: Props) => {
         {
           name: data.name,
           amount: parseFloat(data.amount?.replace(/,/g, '')),
-          isChecked: moment().toISOString(),
+          isChecked: '',
         },
       ],
     };
@@ -302,4 +302,4 @@ const ExpenseItem = ({type}: Props) => {
   );
 };
 
-export default ExpenseItem;
+export default memo(ExpenseItem);
