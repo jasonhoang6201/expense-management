@@ -7,16 +7,17 @@ import {formatMoney} from '@src/utils/money';
 interface Props {
   current: number;
   total: number;
+  remaining: number;
 }
 
-const CircularProgress = ({current, total}: Props) => {
+const CircularProgress = ({current, total, remaining}: Props) => {
   const [show, setShow] = useState(false);
 
-  const radius = 100;
+  const radius = 120;
   const strokeWidth = 25;
   const normalizedRadius = radius - strokeWidth / 2;
   const circumference = normalizedRadius * 2 * Math.PI;
-  const progress = current / total;
+  const progress = remaining / total;
   const strokeDashoffset = circumference - progress * circumference;
 
   return (
@@ -48,8 +49,12 @@ const CircularProgress = ({current, total}: Props) => {
         </G>
       </Svg>
       <TouchableOpacity onLongPress={() => setShow(!show)} className="absolute">
-        <Text className="text-[20px] font-bold text-center text-[#FF8F8F]">
-          {show ? `${Math.round(progress * 100)}%` : formatMoney(current)}
+        <Text className="text-[20px] font-bold text-center text-[#FF8F8F] whitespace-pre-line">
+          {show
+            ? `${Math.round(progress * 100)}%`
+            : `${formatMoney(current)}\n\------------------\n${formatMoney(
+                remaining,
+              )}`}
         </Text>
       </TouchableOpacity>
     </View>

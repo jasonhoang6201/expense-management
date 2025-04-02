@@ -1,12 +1,12 @@
 import CircularProgress from '@src/components/circular-progress';
 import ExpenseList from '@src/components/expense/expense-list';
 import StackProgressChart from '@src/components/stack-progress-chart';
-import Text from '@src/components/text';
 import {getAllExpensesByMonth} from '@src/mmkv/expense';
 import useExpenseStore from '@src/store/expense';
 import {Expense} from '@src/types/expense';
 import React, {useEffect, useMemo, useState} from 'react';
 import {View} from 'react-native';
+// @ts-ignore
 import FlipCard from 'react-native-flip-card';
 
 const FinancialManagement = () => {
@@ -67,7 +67,8 @@ const FinancialManagement = () => {
         <FlipCard flipHorizontal={true} flipVertical={false} clickable={true}>
           <StackProgressChart data={data} />
           <CircularProgress
-            current={totalAmount - totalCheckedAmount}
+            current={totalCheckedAmount}
+            remaining={totalAmount - totalCheckedAmount}
             total={totalAmount}
           />
         </FlipCard>
