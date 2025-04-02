@@ -7,7 +7,7 @@ import ExpenseItem from './expense-item';
 const ExpenseList = () => {
   return (
     <View className="px-[8px] mt-[16px] flex-1">
-      <NestableScrollContainer>
+      <NestableScrollContainer showsVerticalScrollIndicator={false}>
         {Object.keys(ExpenseType).map(type => (
           <ExpenseItem key={type} type={type as ExpenseType} />
         ))}

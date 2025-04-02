@@ -52,7 +52,7 @@ const CircularProgress = ({current, total, remaining}: Props) => {
         <Text className="text-[20px] font-bold text-center text-[#FF8F8F] whitespace-pre-line">
           {show
             ? `${Math.round(progress * 100)}%`
-            : `${formatMoney(current)}\n\------------------\n${formatMoney(
+            : `${formatMoney(current)}\n------------------\n${formatMoney(
                 remaining,
               )}`}
         </Text>

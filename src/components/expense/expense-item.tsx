@@ -139,14 +139,12 @@ const ExpenseItem = ({type}: Props) => {
       if (previousData && Object.keys(previousData).length > 0) {
         temp = {
           type: type,
-          month: previousMonth,
+          month: viewMonth,
           items: previousData.items?.map(item => ({
             ...item,
             isChecked: '',
           })),
         };
-        setExpense(temp);
-        saveExpense(temp);
       } else {
         const template = getTemplate(type);
         temp = {
@@ -211,6 +209,7 @@ const ExpenseItem = ({type}: Props) => {
         )}
 
         <NestableDraggableFlatList
+          showsVerticalScrollIndicator={false}
           data={expense?.items ?? []}
           keyExtractor={(item, index) => `${item.name}-${index}`}
           onDragEnd={onDragEnd}
