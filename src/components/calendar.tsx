@@ -2,7 +2,7 @@ import AngleDownIcon from '@src/assets/icons/angle-down';
 import useExpenseStore from '@src/store/expense';
 import moment from 'moment';
 import React, {useState} from 'react';
-import {TouchableOpacity} from 'react-native';
+import {Modal, TouchableOpacity} from 'react-native';
 import MonthPicker from 'react-native-month-year-picker';
 import Text from './text';
 
@@ -22,22 +22,23 @@ const Calendar = () => {
       </TouchableOpacity>
 
       {showCalendar && (
-        <MonthPicker
-          onChange={(event, date) => {
-            if (event === 'dateSetAction') {
-              setViewMonth(moment(date).format('YYYY-MM'));
-              setShowCalendar(false);
-            }
-            if (event === 'dismissedAction') {
-              setShowCalendar(false);
-            }
-          }}
-          value={moment(viewMonth).toDate()}
-          maximumDate={moment().toDate()}
-          locale="en"
-          mode="short"
-          autoTheme
-        />
+        <Modal visible={showCalendar} transparent>
+          <MonthPicker
+            onChange={(event, date) => {
+              if (event === 'dateSetAction') {
+                setViewMonth(moment(date).format('YYYY-MM'));
+                setShowCalendar(false);
+              }
+              if (event === 'dismissedAction') {
+                setShowCalendar(false);
+              }
+            }}
+            value={moment(viewMonth).toDate()}
+            maximumDate={moment().toDate()}
+            locale="en"
+            mode="short"
+          />
+        </Modal>
       )}
     </>
   );
